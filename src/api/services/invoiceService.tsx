@@ -13,6 +13,6 @@ export const FIND_INVOICES_BY_SENDER_ID = async (senderId: number) => {
 }
 
 export const UPDATE = async (data: InvoiceRequestUpdate) => {
-  let response = await instance.patch(`/invoices/${data.id}`, {message: data.message, timestamp: data.time})
+  let response = await instance.patch(`/invoices/${data.id}`, {message: data.message, timestamp: data.time, amount: Number(data.amount)})
   return response.data;
 }

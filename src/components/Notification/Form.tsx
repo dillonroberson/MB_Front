@@ -45,7 +45,7 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
   useEffect(() => {
     if (!selectInvoice) return;
     setValue("id", selectInvoice.id.toString());
-    setValue("amount", formatNumber(+selectInvoice.amount) + " " + "VND");
+    setValue("amount", formatNumber(+selectInvoice.amount));
     setValue(
       "time",
       convertTimestampTodate(selectInvoice.timeStamp).toLocaleTimeString(
@@ -71,7 +71,7 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
     selectInvoice ? new Date(selectInvoice.timeStamp) : new Date()
   );
 
-  const [dateStamp, setDateStamp] = useState<number>(0);
+  const [dateStamp, setDateStamp] = useState<number>(selectInvoice?.timeStamp ?? 0);
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate;
     setDate(currentDate);
@@ -91,10 +91,13 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
   };
 
   const onSubmit = (data: InvoiceForm) => {
+    data.amount = data.amount.split(".").join("");
+    window.console.log(data);
     const request: InvoiceRequestUpdate = {
       id: +data.id,
       message: data.message,
       time: dateStamp,
+      amount: data.amount
     };
     dispatch(updateInvoice(request));
   };

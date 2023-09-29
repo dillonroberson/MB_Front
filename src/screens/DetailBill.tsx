@@ -69,7 +69,7 @@ const DetailBill = () => {
   return (
     <View style={{height: '100%'}}>
       <TouchableOpacity
-        onPress={() => setOpenModal(true)}
+        onLongPress={() => setOpenModal(true)}
         activeOpacity={0.9}
         style={{
           paddingTop: 12,

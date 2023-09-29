@@ -53,8 +53,8 @@ AnyAction
   return async function updateInvoiceThunk(dispatch: Dispatch) {
     await UPDATE(data)
       .then((res) => {
+        window.console.log(getInvoiceResponse(res));
         dispatch(getInvoiceResponse(res))
-        
       })
       .catch((err) => dispatch(getInvoiceResponse(err.response.data)));
   };

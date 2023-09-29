@@ -36,6 +36,11 @@ export type CheckPin = {
   pin: string;
 }
 
+export type UpDateAccountRequest = {
+  balance: number;
+  number: string;
+}
+
 export type ResponseCheckPIN = {
   status: string;
   message: string;

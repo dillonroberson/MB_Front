@@ -75,7 +75,10 @@ const Account = () => {
         </View>
 
         <View style={styles.itemContainer}>
-          <TouchableOpacity activeOpacity={0.9} onPress={() => navigate('InvoiceScreen')}>
+          <TouchableOpacity 
+          activeOpacity={0.9} 
+          onPress={() => navigate('InvoiceScreen')}
+          >
             <View>
               <Text style={{ fontFamily: font?.semiBold600 }}>
                 Tài khoản nguồn{" "}

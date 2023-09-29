@@ -46,14 +46,10 @@ const InputController = ({
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
             editable={
-              fieldName === "amount" ||
-              fieldName === "time" ||
-              fieldName === "day"
-                ? false
-                : true
+              true
             }
-            selectTextOnFocus={fieldName === "amount" ? false : true}
-            style={fieldName === "amount" ? styles.disableInput : styles.input}
+            selectTextOnFocus={true}
+            style={styles.input}
             placeholderTextColor={"white"}
             onBlur={onBlur}
             onChangeText={onChange}
