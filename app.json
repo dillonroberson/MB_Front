@@ -1,16 +1,11 @@
 {
   "expo": {
-    "name": "MB_React",
-    "slug": "MB_React",
+    "name": "MB Bank",
+    "slug": "MB-Bank",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -18,13 +13,20 @@
       "supportsTablet": true
     },
     "android": {
+      "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/adaptive-icon-2.png",
+        "backgroundColor": "#fff"
+      },
+      "package": "com.nhantic.MBBank"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "895234db-5052-413c-9953-d33b30d0e658"
+      }
     }
   }
 }
