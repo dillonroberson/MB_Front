@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getFonts } from "../../hooks/getFonts";
@@ -10,6 +10,7 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updateInvoice } from "../../thunk/invoiceThunk";
+import React = require("react");
 
 interface FormProps {
   selectInvoice: Invoice | null;
@@ -95,6 +96,8 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
 
   const onSubmit = (data: InvoiceForm) => {
     data.amount = data.amount.split(".").join("");
+    data.remain = data.remain.split(".").join("");
+    window.console.log(data.amount);
     const request: InvoiceRequestUpdate = {
       id: +data.id,
       message: data.message,
