@@ -23,6 +23,7 @@ export type InvoiceRequestUpdate = {
   message: string;
   time: number;
   amount: string;
+  remain: string;
 }
 
 export type InvoiceResponse = {

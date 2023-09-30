@@ -7,7 +7,7 @@ import { InvoiceForm } from "./Form";
 export interface InputControllerProps {
   control: Control<InvoiceForm> | undefined;
   errors: FieldErrors<InvoiceForm>;
-  fieldName: "amount" | "time" | "message" | "day";
+  fieldName: "amount" | "time" | "message" | "day" | "remain";
 }
 
 const InputController = ({
@@ -26,6 +26,8 @@ const InputController = ({
         return "Giờ";
       case "message":
         return "Lời nhắn";
+      case "remain": 
+        return "Số dư"
       default:
         break;
     }

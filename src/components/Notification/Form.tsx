@@ -22,6 +22,7 @@ export type InvoiceForm = {
   day: string;
   time: string;
   amount: string;
+  remain: string;
 };
 
 const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
@@ -33,6 +34,7 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
     time: "",
     message: "",
     amount: "",
+    remain: ""
   };
   const font = getFonts();
   const {
@@ -65,6 +67,7 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
       )
     );
     setValue("message", selectInvoice.message);
+    setValue("remain", formatNumber(+selectInvoice.remainSendAcc));
   }, [selectInvoice]);
 
   const [date, setDate] = useState(
@@ -92,12 +95,12 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
 
   const onSubmit = (data: InvoiceForm) => {
     data.amount = data.amount.split(".").join("");
-    window.console.log(data);
     const request: InvoiceRequestUpdate = {
       id: +data.id,
       message: data.message,
       time: dateStamp,
-      amount: data.amount
+      amount: data.amount,
+      remain: data.remain
     };
     dispatch(updateInvoice(request));
   };
@@ -173,6 +176,7 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
 
       {/* Message */}
       <InputController control={control} errors={errors} fieldName="message" />
+      <InputController control={control} errors={errors} fieldName="remain" />
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={handleSubmit(onSubmit)}
