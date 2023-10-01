@@ -56,7 +56,6 @@ AnyAction
         dispatch(getInvoiceResponse(res))
       })
       .catch((err) => {
-        window.console.log(getInvoiceResponse(data));
         dispatch(getInvoiceResponse(err.response.data))
     });
   };

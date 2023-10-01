@@ -59,7 +59,7 @@ const DetailBill = () => {
     let message = invoice.message;
     let content = `TK ${account}|GD: ${transaction}VND ${typeDate(
       time
-    )}|SD:${currentAcc.balance}VND|ND: ${message}`;
+    )}|SD:${remain}VND|ND: ${message}`;
     return content;
   };
 

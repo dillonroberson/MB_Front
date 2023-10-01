@@ -7,7 +7,7 @@ import { InvoiceForm } from "./Form";
 export interface InputControllerProps {
   control: Control<InvoiceForm> | undefined;
   errors: FieldErrors<InvoiceForm>;
-  fieldName: "amount" | "time" | "message" | "day" | "remain";
+  fieldName: "amount" | "time" | "message" | "day" | "remain" | "balance" | "number";
 }
 
 const InputController = ({

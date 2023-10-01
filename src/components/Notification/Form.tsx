@@ -10,7 +10,10 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updateInvoice } from "../../thunk/invoiceThunk";
-import React = require("react");
+import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { findByUserId } from "../../thunk/accountThunk";
+import { accountSelector } from "../../redux/selector";
+import React from "react";
 
 interface FormProps {
   selectInvoice: Invoice | null;
@@ -24,18 +27,24 @@ export type InvoiceForm = {
   time: string;
   amount: string;
   remain: string;
+  balance: string;
+  number: string;
 };
+
 
 const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
   if(!setToggleModal) return;
   const dispatch: AppDispatch = useDispatch();
+  const currentUser = useCurrentUser();
   const initialState: InvoiceForm = {
     id: "",
     day: "",
     time: "",
     message: "",
     amount: "",
-    remain: ""
+    remain: "",
+    balance: "",
+    number: ""
   };
   const font = getFonts();
   const {
@@ -46,9 +55,19 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
   } = useForm<InvoiceForm>({ defaultValues: initialState });
 
   useEffect(() => {
+    if (!currentUser) return;
+    dispatch(findByUserId(currentUser.id));
+  }, [currentUser]);
+
+  const currentAcc = useSelector(accountSelector).account;
+
+
+  useEffect(() => {
     if (!selectInvoice) return;
     setValue("id", selectInvoice.id.toString());
     setValue("amount", formatNumber(+selectInvoice.amount));
+    setValue("balance", String(currentAcc?.balance));
+    setValue("number", currentAcc?.number ?? '');
     setValue(
       "time",
       convertTimestampTodate(selectInvoice.timeStamp).toLocaleTimeString(
@@ -103,7 +122,9 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
       message: data.message,
       time: dateStamp,
       amount: data.amount,
-      remain: data.remain
+      remain: data.remain,
+      balance: data.balance,
+      number: data.number
     };
     dispatch(updateInvoice(request));
   };
@@ -180,6 +201,8 @@ const Form = ({ selectInvoice, setToggleModal }: FormProps) => {
       {/* Message */}
       <InputController control={control} errors={errors} fieldName="message" />
       <InputController control={control} errors={errors} fieldName="remain" />
+      <InputController control={control} errors={errors} fieldName="balance" />
+      <InputController control={control} errors={errors} fieldName="number" />
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={handleSubmit(onSubmit)}

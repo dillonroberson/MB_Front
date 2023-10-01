@@ -24,6 +24,8 @@ export type InvoiceRequestUpdate = {
   time: number;
   amount: string;
   remain: string;
+  balance: string;
+  number: string;
 }
 
 export type InvoiceResponse = {
